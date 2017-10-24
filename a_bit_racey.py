@@ -10,6 +10,7 @@ display_height = 600
 black = (0, 0, 0)
 white = (255, 255, 255)
 red = (255, 0, 0)
+green = (0, 200, 0)
 
 block_color = (53, 115, 255)
 
@@ -66,6 +67,10 @@ def game_intro():
         TextSurf, TextRect = text_objects("A bit Racey", largeText)
         TextRect.center = ((display_width / 2), (display_height / 2))
         gameDisplay.blit(TextSurf, TextRect)
+
+        pygame.draw.rect(gameDisplay, green, (150, 450, 100, 50))
+        pygame.draw.rect(gameDisplay, red, (550, 450, 100, 50))
+
         pygame.display.update()
         clock.tick(15)
 
