@@ -21,6 +21,7 @@ block_color = (53, 115, 255)
 car_width = 73
 
 pause = False
+#crash = True
 
 gameDisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('A bit Racey')
@@ -56,7 +57,26 @@ def message_display(text):
     game_loop()
 
 def crash():
-    message_display('You Crashed.')
+
+    largeText = pygame.font.Font('freesansbold.ttf', 115)
+    TextSurf, TextRect = text_objects("You Crashed", largeText)
+    TextRect.center = ((display_width / 2), (display_height / 2))
+    gameDisplay.blit(TextSurf, TextRect)
+
+    while True:
+        for event in pygame.event.get():
+            #print(event)
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit
+
+        #gameDisplay.fill(white)
+
+        button("Play Again", 150, 450, 100, 50, green, bright_green, game_loop)
+        button("Quit", 550, 450, 100, 50, red, bright_red, quitgame)
+
+        pygame.display.update()
+        clock.tick(15)
 
 def button(msg, x, y, w, h, ic, ac, action=None):
     mouse = pygame.mouse.get_pos()
@@ -83,6 +103,12 @@ def unpause():
     pause = False
 
 def paused():
+
+    largeText = pygame.font.Font('freesansbold.ttf', 115)
+    TextSurf, TextRect = text_objects("Paused", largeText)
+    TextRect.center = ((display_width / 2), (display_height / 2))
+    gameDisplay.blit(TextSurf, TextRect)
+
     while pause:
         for event in pygame.event.get():
             #print(event)
@@ -90,11 +116,7 @@ def paused():
                 pygame.quit()
                 quit
 
-        gameDisplay.fill(white)
-        largeText = pygame.font.Font('freesansbold.ttf', 115)
-        TextSurf, TextRect = text_objects("Paused", largeText)
-        TextRect.center = ((display_width / 2), (display_height / 2))
-        gameDisplay.blit(TextSurf, TextRect)
+        #gameDisplay.fill(white)
 
         button("Continue", 150, 450, 100, 50, green, bright_green, unpause)
         button("Quit", 550, 450, 100, 50, red, bright_red, quitgame)
